@@ -67,7 +67,7 @@ namespace AdventOfCode
                 }
             }
 
-            Console.WriteLine("Solutions: ");
+            Console.WriteLine("Answers: ");
             Console.WriteLine("*: " + Visited.Last().Distance);
             Console.Write("**: " + _firstCrossed.Distance);
 

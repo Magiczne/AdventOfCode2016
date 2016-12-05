@@ -11,14 +11,14 @@ namespace Day_3
     {
         private static void Main()
         {
-            var solution = new OneStarSolution();
+            var solution = new Solution();
             solution.Solve();
 
             Console.Read();
         }
     }
 
-    internal class OneStarSolution
+    internal class Solution
     {
         private readonly List<List<int>> _data = new List<List<int>>();
 
@@ -27,8 +27,27 @@ namespace Day_3
             GetInput();
 
             var possible = _data.Count(IsValidTriangle);
+            var possible2 = 0;
 
+            //Part 2
+            for (var i = 0; i < _data.Count; i += 3)
+            {
+                for (var j = 0; j < 3; j++)
+                {
+                    var list = new List<int>()
+                    {
+                        _data[i][j],
+                        _data[i + 1][j],
+                        _data[i + 2][j]
+                    };
+
+                    if (IsValidTriangle(list)) possible2++;
+                }
+            }
+
+            Console.WriteLine("Answers: ");
             Console.WriteLine("*: " + possible);
+            Console.WriteLine("**: " + possible2);
         }
 
         private void GetInput()
@@ -53,17 +72,17 @@ namespace Day_3
                             int.Parse(sides[2])
                         };
 
-                        list.Sort();
-
                         _data.Add(list);
                     }
                 }
             }
         }
 
-        private static bool IsValidTriangle(IReadOnlyList<int> sides)
+        private static bool IsValidTriangle(IEnumerable<int> sides)
         {
-            return sides[0] + sides[1] > sides[2];
+            var tmp = new List<int>(sides);
+            tmp.Sort();
+            return tmp[0] + tmp[1] > tmp[2];
         }
     }
 }

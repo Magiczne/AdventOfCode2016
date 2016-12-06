@@ -18,6 +18,7 @@ namespace Day_5
                 {
                     sb.Append(b.ToString("X2"));
                 }
+
                 return sb.ToString();
             }
         }

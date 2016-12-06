@@ -8,7 +8,7 @@ namespace Day_5
         private static void Main()
         {
             var solution = new Solution();
-            solution.Solve();
+            //solution.Solve();
             solution.SolveTwoStars();
 
             Console.Read();
@@ -40,7 +40,7 @@ namespace Day_5
         {
             var password = new StringBuilder("--------");
 
-            for (var i = 0;; i++)
+            for (var i = 0; password.ToString().Contains("-"); i++)
             {
                 var encoded = Util.HashMd5(Input + i);
 
@@ -52,11 +52,6 @@ namespace Day_5
                     {
                         password[index] = encoded[6];
                     }
-                }
-
-                if (!password.ToString().Contains("-"))
-                {
-                    break;
                 }
             }
 

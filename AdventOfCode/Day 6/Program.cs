@@ -51,9 +51,30 @@ namespace Day_6
                 Console.Write(MostCommon(line.ToString()));
             }
             Console.WriteLine();
+
+            Console.Write("**: ");
+            foreach (var line in vertical)
+            {
+                Console.Write(LeastCommon(line.ToString()));
+            }
+            Console.WriteLine();
         }
 
         private static char MostCommon(string line)
+        {
+            var lettersCount = GetLettersFrequency(line);
+
+            return lettersCount.First(p => p.Value == lettersCount.Values.Max()).Key;
+        }
+
+        private static char LeastCommon(string line)
+        {
+            var lettersCount = GetLettersFrequency(line);
+
+            return lettersCount.First(p => p.Value == lettersCount.Values.Min()).Key;
+        }
+
+        private static Dictionary<char, int> GetLettersFrequency(string line)
         {
             var lettersCount = new Dictionary<char, int>();
 
@@ -69,7 +90,7 @@ namespace Day_6
                 }
             }
 
-            return lettersCount.First(p => p.Value == lettersCount.Values.Max()).Key;
+            return lettersCount;
         }
     }
 }

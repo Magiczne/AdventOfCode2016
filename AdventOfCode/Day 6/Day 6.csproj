@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="input.txt" />
-    <Content Include="test_input.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

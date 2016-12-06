@@ -88,7 +88,6 @@ namespace Day_2
                             case 3:
                                 if (_lastRow > 1) _lastRow--;
                                 break;
-
                             case 2:
                                 if (_lastRow > 0) _lastRow--;
                                 break;

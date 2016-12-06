@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Day_5
 {
@@ -8,6 +9,7 @@ namespace Day_5
         {
             var solution = new Solution();
             solution.Solve();
+            solution.SolveTwoStars();
 
             Console.Read();
         }
@@ -32,6 +34,33 @@ namespace Day_5
             }
 
             Console.WriteLine("*: " + password);
+        }
+
+        public void SolveTwoStars()
+        {
+            var password = new StringBuilder("--------");
+
+            for (var i = 0;; i++)
+            {
+                var encoded = Util.HashMd5(Input + i);
+
+                if (encoded.Substring(0, 5) == "00000")
+                {
+                    int index;
+
+                    if (int.TryParse(encoded[5].ToString(), out index) && index < 8 && password[index] == '-')
+                    {
+                        password[index] = encoded[6];
+                    }
+                }
+
+                if (!password.ToString().Contains("-"))
+                {
+                    break;
+                }
+            }
+
+            Console.WriteLine("**: " + password);
         }
     }
 }

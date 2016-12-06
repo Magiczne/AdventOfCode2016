@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -12,6 +13,21 @@ namespace Day_4
         private readonly Dictionary<char, int> _lettersFreq = new Dictionary<char, int>();
 
         public int SectorId { get; private set; }
+
+        private string _decryptedName = string.Empty;
+        public string DecryptedName
+        {
+            get
+            {
+                if (_decryptedName == string.Empty)
+                {
+                    var ret = _encryptedName.Aggregate("", (current, n) => current + (n.CaesarCode(SectorId) + " "));
+                    _decryptedName = ret.TrimEnd();
+                }
+
+                return _decryptedName;
+            }
+        }
 
         public bool IsValid
         {

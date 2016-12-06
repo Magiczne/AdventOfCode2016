@@ -28,6 +28,16 @@ namespace Day_4
 
             Console.WriteLine("Answers: ");
             Console.WriteLine("*: " + sectorSum);
+            Console.Write("**: ");
+
+            foreach (var r in _rooms)
+            {
+                if (r.DecryptedName.Contains("north"))
+                {
+                    Console.WriteLine(r.DecryptedName + "\t -> " + r.SectorId);
+                    break;
+                }
+            }
         }
 
         private void GetInput()

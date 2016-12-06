@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -21,7 +20,8 @@ namespace Day_4
             {
                 if (_decryptedName == string.Empty)
                 {
-                    var ret = _encryptedName.Aggregate("", (current, n) => current + (n.CaesarCode(SectorId) + " "));
+                    var ret = _encryptedName.Aggregate(string.Empty, (current, n) => current + (n.CaesarCode(SectorId) + " "));
+
                     _decryptedName = ret.TrimEnd();
                 }
 

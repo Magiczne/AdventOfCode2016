@@ -22,7 +22,7 @@ namespace Day_7
             return false;
         }
 
-        public static List<string> GetAbaList(this string s)
+        public static IEnumerable<string> GetAbaList(this string s)
         {
             var ret = new List<string>();
 

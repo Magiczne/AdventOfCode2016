@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Day_7
 {
-    internal class IpAddress
+    internal class IpAddressV7
     {
         private readonly List<string> _sequences = new List<string>();
         private readonly List<string> _hypernetSequences = new List<string>();
@@ -17,7 +17,22 @@ namespace Day_7
             }
         }
 
-        public IpAddress(string line)
+        public bool SupportsSsl
+        {
+            get
+            {
+                var abaList = new List<string>();
+
+                foreach (var seq in _sequences)
+                {
+                    abaList.AddRange(seq.GetAbaList());
+                }
+
+                return _hypernetSequences.Any(seq => abaList.Any(seq.HasBab));
+            }
+        }
+
+        public IpAddressV7(string line)
         {
             line = line.Trim();
 

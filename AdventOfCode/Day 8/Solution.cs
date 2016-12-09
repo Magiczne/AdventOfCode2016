@@ -33,6 +33,19 @@ namespace Day_8
 
             Console.WriteLine("Answers: ");
             Console.WriteLine("*: " + litPixels);
+            Print();
+        }
+
+        private static void Print()
+        {
+            foreach (var list in _screen)
+            {
+                foreach (var elem in list)
+                {
+                    Console.Write(elem ? "#" : " ");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }

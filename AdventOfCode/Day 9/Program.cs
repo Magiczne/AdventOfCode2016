@@ -25,9 +25,10 @@ namespace Day_9
 
             Console.WriteLine("Answers: ");
             Console.WriteLine(Decompress(_data));
+            Console.WriteLine(Decompress(_data, true));
         }
 
-        private long Decompress(string input)
+        private long Decompress(string input, bool twoStars = false)
         {
             long output = 0;
             var i = 0;
@@ -54,8 +55,16 @@ namespace Day_9
                 var repetitionCount = int.Parse(tmp);
                 i += tmp.Length + 1;
 
-                var data = input.Substring(i, repetitionLength);
-                output += data.Length*repetitionCount;
+                if (twoStars)
+                {
+                    var data = Decompress(input.Substring(i, repetitionLength), true);
+                    output += data*repetitionCount;
+                }
+                else
+                {
+                    var data = input.Substring(i, repetitionLength);
+                    output += data.Length*repetitionCount;
+                }
 
                 i += repetitionLength;
             }

@@ -19,9 +19,9 @@ namespace Day_10
 
     internal partial class Solution
     {
-        private readonly List<string> _data;
         private static readonly List<Bot> Bots = new List<Bot>();
         private static readonly Dictionary<int, int> Outputs = new Dictionary<int, int>();
+        private readonly List<string> _data;
 
         public Solution()
         {
@@ -31,7 +31,9 @@ namespace Day_10
 
         public void Solve()
         {
-            var regex = new Regex(@"value (?<val>\d+) goes to bot (?<bot>\d+)|bot (?<s_bot>\d+) gives low to (?<low_to>bot|output) (?<low_value>\d+) and high to (?<high_to>bot|output) (?<high_value>\d+)");
+            var regex =
+                new Regex(
+                    @"value (?<val>\d+) goes to bot (?<bot>\d+)|bot (?<s_bot>\d+) gives low to (?<low_to>bot|output) (?<low_value>\d+) and high to (?<high_to>bot|output) (?<high_value>\d+)");
 
             foreach (var line in _data)
             {
@@ -60,6 +62,10 @@ namespace Day_10
                     bot.Process();
                 }
             }
+
+            var twoStars = Outputs[0]*Outputs[1]*Outputs[2];
+
+            Console.WriteLine("**: " + twoStars);
         }
     }
 }

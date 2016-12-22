@@ -30,25 +30,25 @@ namespace Day_12
                     {
                         var value = Regex.IsMatch(_params[0], @"^-?\d+$")
                             ? int.Parse(_params[0])
-                            : Registers[_params[0]];
+                            : _registers[_params[0]];
 
-                        Registers[_params[1]] = value;
+                        _registers[_params[1]] = value;
                         break;
                     }
 
                     case "inc":
-                        Registers[_params[0]]++;
+                        _registers[_params[0]]++;
                         break;
 
                     case "dec":
-                        Registers[_params[0]]--;
+                        _registers[_params[0]]--;
                         break;
 
                     case "jnz":
                     {
                         var value = Regex.IsMatch(_params[0], @"^-?\d+$")
                             ? int.Parse(_params[0])
-                            : Registers[_params[0]];
+                            : _registers[_params[0]];
 
                         if (value != 0)
                         {

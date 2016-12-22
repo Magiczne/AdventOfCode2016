@@ -11,7 +11,20 @@ namespace Day_12
             Console.WriteLine("Answers: ");
 
             var solution = new Solution();
-            solution.Solve();
+            solution.Solve(new Dictionary<string, int>
+            {
+                {"a", 0},
+                {"b", 0},
+                {"c", 0},
+                {"d", 0}
+            });
+            solution.Solve(new Dictionary<string, int>
+            {
+                {"a", 0},
+                {"b", 0},
+                {"c", 1},
+                {"d", 0}
+            });
 
             Console.Read();
         }
@@ -19,13 +32,7 @@ namespace Day_12
 
     internal partial class Solution
     {
-        private static readonly Dictionary<string, int> Registers = new Dictionary<string, int>
-        {
-            {"a", 0},
-            {"b", 0},
-            {"c", 0},
-            {"d", 0}
-        };
+        private static Dictionary<string, int> _registers;
 
         private readonly List<Command> _commands = new List<Command>();
 
@@ -38,8 +45,10 @@ namespace Day_12
             }
         }
 
-        public void Solve()
+        public void Solve(Dictionary<string, int> registers)
         {
+            _registers = registers;
+
             for (var i = 0; i < _commands.Count;)
             {
                 var tmp = i + _commands[i].Exec();
@@ -50,7 +59,7 @@ namespace Day_12
                 i = tmp;
             }
 
-            Console.WriteLine("*: " + Registers["a"]);
+            Console.WriteLine("a: " + _registers["a"]);
         }
     }
 }

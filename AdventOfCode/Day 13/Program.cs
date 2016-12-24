@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Day_13
 {
@@ -11,6 +12,7 @@ namespace Day_13
 
             var solution = new Solution();
             solution.Solve();
+            solution.TwoStars();
 
             Console.Read();
         }
@@ -19,12 +21,13 @@ namespace Day_13
     internal class Solution
     {
         private const int Input = 1350;
-        private const int MazeSize = 50;
-
+        
         private const int StartX = 1;
         private const int StartY = 1;
         private const int EndX = 31;
         private const int EndY = 39;
+
+        private static readonly int MazeSize = Math.Max(EndX, EndY) + 10;
 
         private readonly char[,] _floor = new char[MazeSize, MazeSize];
         private readonly int[,] _distance = new int[MazeSize, MazeSize];
@@ -87,6 +90,13 @@ namespace Day_13
             }
 
             Console.WriteLine("*: " + _distance[EndX, EndY]);
+        }
+
+        public void TwoStars()
+        {
+            var count = _distance.Cast<int>().Count(item => (item <= 50 && item != -1));
+
+            Console.WriteLine("**: " + count);
         }
 
         private static int CountBits(int value)

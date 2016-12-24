@@ -11,6 +11,7 @@ namespace Day_14
             Console.WriteLine("Answers: ");
             var solution = new Solution();
             solution.Solve();
+            solution.TwoStars();
 
             Console.Read();
         }
@@ -21,6 +22,7 @@ namespace Day_14
         private const string Input = "cuanljph";
         
         private readonly Dictionary<int, string> _checksumCache = new Dictionary<int, string>();
+        private readonly Dictionary<int, string> _strechedCache = new Dictionary<int, string>();
         private readonly List<string> _foundKeys = new List<string>();
 
         public void Solve()
@@ -47,7 +49,36 @@ namespace Day_14
             }
 
             var p = _checksumCache.First(pair => pair.Value == _foundKeys.Last());
-            Console.WriteLine(p.Key + ": " + p.Value);
+            Console.WriteLine("*: " + p.Key);
+        }
+
+        public void TwoStars()
+        {
+            _foundKeys.Clear();
+
+            for (var i = 0; _foundKeys.Count < 64; i++)
+            {
+                var md5 = StrechedHash(i);
+
+                char tripleMaker;
+
+                if (md5.HasTriple(out tripleMaker))
+                {
+                    for (var j = i + 1; j < i + 1000; j++)
+                    {
+                        var hash = StrechedHash(j);
+
+                        if (hash.HasQuintuple(tripleMaker))
+                        {
+                            _foundKeys.Add(md5);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            var p = _strechedCache.First(pair => pair.Value == _foundKeys.Last());
+            Console.WriteLine("**: " + p.Key);
         }
 
         private string HashOrCache(int index)
@@ -59,6 +90,25 @@ namespace Day_14
 
             _checksumCache[index] = Util.HashMd5(Input + index).ToLower();
             return _checksumCache[index];
+        }
+
+        private string StrechedHash(int index)
+        {
+            if (_strechedCache.ContainsKey(index))
+            {
+                return _strechedCache[index];
+            }
+
+            var hash = HashOrCache(index);
+
+            for (var i = 0; i < 2016; i++)
+            {
+                hash = Util.HashMd5(hash).ToLower();
+            }
+
+            _strechedCache[index] = hash.ToLower();
+
+            return _strechedCache[index];
         }
     }
 }
